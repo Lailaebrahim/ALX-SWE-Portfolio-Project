@@ -1,9 +1,9 @@
-from flaskblog import db, bcrypt
+from PersonalBlogWebApp import db, bcrypt
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
-from flaskblog.models import User, Post
-from flaskblog.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, ResetPasswordRequest, ResetPassword
-from flaskblog.users.utils import savr_pic, send_reset_email
+from PersonalBlogWebApp.models import User, Post
+from PersonalBlogWebApp.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, ResetPasswordRequest, ResetPassword
+from PersonalBlogWebApp.users.utils import savr_pic, send_reset_email
 
 users = Blueprint('users', __name__)
 

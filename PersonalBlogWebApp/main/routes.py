@@ -1,6 +1,6 @@
 from flask import render_template, request, Blueprint
-from flaskblog.main.forms import SearchForm
-from flaskblog.models import Post
+from PersonalBlogWebApp.main.forms import SearchForm
+from PersonalBlogWebApp.models import Post
 
 
 main = Blueprint('main', __name__)

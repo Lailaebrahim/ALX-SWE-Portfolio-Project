@@ -1,7 +1,7 @@
-from flaskblog import db
+from PersonalBlogWebApp import db
 from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
-from flaskblog.posts.forms import PostForm
-from flaskblog.models import Post
+from PersonalBlogWebApp.posts.forms import PostForm
+from PersonalBlogWebApp.models import Post
 from flask_login import current_user, login_required
 from datetime import datetime
 
