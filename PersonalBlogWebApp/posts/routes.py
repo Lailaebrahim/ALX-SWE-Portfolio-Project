@@ -21,7 +21,7 @@ def new_post():
         db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('main.home'))
-    return render_template('update_create_post.html', title='New Post', form=form, legend='New Post')
+    return render_template('update_create_post.html', title='New Blog', form=form, legend='New Blog')
 
 
 @posts.route('/new/scheduled/post', methods=['GET', 'POST'])

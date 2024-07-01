@@ -27,7 +27,7 @@
     
     <!-- link to a local css stylesheet defined by developer -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}"/>
-    
+
     <!-- if there is a title variable given to the render_template method display it to give a dynamic title for each web page-->
     {%if title %}
     <title>Personal Blog - {{title}}</title>
@@ -52,7 +52,7 @@
           and it also ensures that the navbar is centered horizontally on the page-->
         <div class="container">
 
-          <a class="navbar-brand mr-4" href="/">Laila's Personal Blog</a>
+          <a class="navbar-brand mr-4" href="/">Personal Blog</a>
           <!--Left navigation bar -->
               <div class="navbar-nav mr-auto">
                 <a class="nav-item nav-link" href="{{url_for('main.home')}}">Home</a>
@@ -61,7 +61,7 @@
           <!--Right navigation bar -->
               <div class="navbar-nav ml-auto">
                 {%if current_user.is_authenticated%}
-                <a class="nav-item nav-link" href="{{url_for('posts.new_post')}}">New Post</a>
+                <a class="nav-item nav-link" href="{{url_for('posts.new_post')}}">New Blog</a>
                 <a class="nav-item nav-link" href="{{url_for('users.account')}}">My Account</a>
                 <a class="nav-item nav-link" href="{{url_for('users.logout')}}">Logout</a>
                 {%else%}
@@ -114,8 +114,10 @@
                   <li class="list-group-item list-group-item-light my-border">
                     <a class="btn-text" style="text-decoration: none" href="{{url_for('main.dev')}}">About Developer</a>
                   </li>
+                  <li class="list-group-item list-group-item-light my-border">
+                    <a class="btn-text" style="text-decoration: none" href="{{url_for('main.About_project')}}">About Project</a>
+                  </li>
                 </ul>
-            </p>
           </div>
         </div>
       </div>

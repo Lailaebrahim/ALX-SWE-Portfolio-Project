@@ -50,3 +50,6 @@ def announcements():
 def dev():
     return  render_template('dev.html', title="About Developer")
 
+@main.route("/Landing-Page")
+def About_project():
+    return  render_template('landing_page.html', title="About App")
