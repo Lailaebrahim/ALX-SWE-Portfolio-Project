@@ -1,7 +1,7 @@
 from flask import Flask
-from flaskblog.config import Configuration
-from flaskblog import db, bcrypt, login_manager, mail, scheduler
-from flaskblog.scheduler import schedule_posts
+from PersonalBlogWebApp.config import Configuration
+from PersonalBlogWebApp import db, bcrypt, login_manager, mail, scheduler
+from PersonalBlogWebApp.scheduler import schedule_posts
 
 
 def create_app(config_class=Configuration):
@@ -20,10 +20,10 @@ def create_app(config_class=Configuration):
 
     scheduler.start()
 
-    from flaskblog.users.routes import users
-    from flaskblog.posts.routes import posts
-    from flaskblog.main.routes import main
-    from flaskblog.errors.handlers import errors
+    from PersonalBlogWebApp.users.routes import users
+    from PersonalBlogWebApp.posts.routes import posts
+    from PersonalBlogWebApp.main.routes import main
+    from PersonalBlogWebApp.errors.handlers import errors
 
     app.register_blueprint(users)
     app.register_blueprint(posts)

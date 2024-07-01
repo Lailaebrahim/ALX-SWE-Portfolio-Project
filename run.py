@@ -1,4 +1,4 @@
-from flaskblog.create__app import create_app
+from PersonalBlogWebApp.create__app import create_app
 
 
 app = create_app()

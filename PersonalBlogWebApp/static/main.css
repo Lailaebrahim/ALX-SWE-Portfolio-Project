@@ -1,6 +1,7 @@
 body {
+  font-family: Arial, sans-serif;
   background: #fafafa;
-  color: #333333;
+  color: #333;
   margin-top: 5rem;
 }
 
@@ -47,13 +48,6 @@ h6 {
   color: #ffffff;
 }
 
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
-}
-
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 700;
-}
 
 .content-section {
   background: #ffffff;
@@ -128,5 +122,99 @@ input[type="datetime-local"] {
   font-size: 18px;
     /* increase font size */
   padding: 10px 10px;
-    
+}
+
+.cover-image img{
+    max-width: 100%;
+    height: auto;
+}
+
+main {
+    padding: 2rem;
+}
+
+#hero {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+#features {
+    background-color: #fafafa;
+    padding: 2rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.feature {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.feature img{
+    max-width: 100%;
+    height: auto;
+}
+
+#about {
+    background-color: #fafafa;
+    padding: 2rem;
+}
+
+.about-grid
+{
+    display: grid;
+    grid-template-columns: repeat(minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+
+.about-item {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#cta {
+    text-align: center;
+    padding: 3rem 0;
+
+}
+
+#register-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.social-links  a{
+    text-decoration: none;
+    color: black;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 1rem;
 }

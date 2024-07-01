@@ -1,5 +1,5 @@
-from flaskblog.models import Post
-from flaskblog import db
+from PersonalBlogWebApp.models import Post
+from PersonalBlogWebApp import db
 from datetime import datetime
 
 
