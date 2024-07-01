@@ -56,7 +56,7 @@ def logout():
 
 @users.route("/account", methods=['GET', 'POST'])
 # login_required: This is a decorator that can be used to protect views from being accessed by unauthenticated users.
-# When users lied to a view function it will redirect the user to the login page if they are not currently logged in.
+# When users request this route it will redirect the user to the login page if they are not currently logged in.
 @login_required
 def account():
     form = UpdateAccountForm()
