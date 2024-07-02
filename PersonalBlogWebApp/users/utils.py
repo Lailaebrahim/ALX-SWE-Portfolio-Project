@@ -29,6 +29,12 @@ def savr_pic(form_profile_pic):
                                .root_path, 'static/profile_pics', current_user.image_file))
     return pic_name
 
+def delete_pic(user):
+    # deleting the old image from the static folder
+    if user.image_file != None and user.image_file != 'default.jpg':
+        # deleting the old image from the static folder
+        os.remove(os.path.join(current_app
+                               .root_path, 'static/profile_pics', user.image_file))
 
 def send_reset_email(user):
     token = user.get_reset_token()

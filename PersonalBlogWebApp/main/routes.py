@@ -1,7 +1,7 @@
 from flask import render_template, request, Blueprint
 from PersonalBlogWebApp.main.forms import SearchForm
 from PersonalBlogWebApp.models import Post
-
+from flask_login import current_user
 
 main = Blueprint('main', __name__)
 
@@ -52,4 +52,4 @@ def dev():
 
 @main.route("/Landing-Page")
 def About_project():
-    return  render_template('landing_page.html', title="About App")
+    return  render_template('landing_page.html', title="About App", current_user=current_user)

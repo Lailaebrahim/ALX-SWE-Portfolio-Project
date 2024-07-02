@@ -121,7 +121,11 @@
         <section id="cta">
             <h2>Ready to Start?</h2>
             <p>Join thousands of bloggers today!</p>
+	    {% if current_user.is_authenticated %}
+		<button id="register-button" data-url="{{url_for('users.account')}}">Register for Free</button>
+	    {% else %}
             <button id="register-button" data-url="{{url_for('users.register')}}">Register for Free</button>
+	    {% endif %}
         </section>
     </main>
 

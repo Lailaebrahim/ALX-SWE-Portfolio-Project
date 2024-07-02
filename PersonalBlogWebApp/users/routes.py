@@ -1,9 +1,9 @@
 from PersonalBlogWebApp import db, bcrypt
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from PersonalBlogWebApp.models import User, Post
 from PersonalBlogWebApp.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, ResetPasswordRequest, ResetPassword
-from PersonalBlogWebApp.users.utils import savr_pic, send_reset_email
+from PersonalBlogWebApp.users.utils import savr_pic, send_reset_email, delete_pic
 
 users = Blueprint('users', __name__)
 
@@ -123,3 +123,17 @@ def reset_password(token):
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('reset_password.html', title='Reset Password', form=form)
+
+
+@users.route("/user/<int:user_id>/delete", methods=['GET', 'POST'])
+@login_required
+def delete_account(user_id):
+    user = User.query.get_or_404(user_id)
+    if user.id != current_user.id:
+        abort(403)
+    logout_user()
+    delete_pic(user)
+    db.session.delete(user)
+    db.session.commit()
+    flash('Your account has been deleted successfully!', 'success')
+    return redirect(url_for('main.home'))
