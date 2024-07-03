@@ -139,6 +139,7 @@ def reset_password(token):
         db.session.commit()
         # Clear the session
         session.pop('reset_user_id', None)
+        session.modified = True
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     
