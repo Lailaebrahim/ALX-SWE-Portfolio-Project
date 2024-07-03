@@ -1,6 +1,5 @@
 import os
 import json
-from redis import Redis
 
 # Load configuration from JSON file
 with open('/home/ubuntu/etc/ALX-SWE-Portfolio-Project-config.json') as f:
@@ -20,7 +19,4 @@ class Configuration:
     MAIL_USERNAME = config_json.get('MAIL_USERNAME')
     MAIL_PASSWORD = config_json.get('MAIL_PASSWORD')
     MAIL_USE_TLS = True
-    SESSION_PERMANENT = True
-    SESSION_TYPE = 'redis'
-    SESSION_REDIS = Redis(host='localhost', port=6379, db=0)
 
