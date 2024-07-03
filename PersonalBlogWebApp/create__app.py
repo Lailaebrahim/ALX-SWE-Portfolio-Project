@@ -1,6 +1,6 @@
 from flask import Flask
 from PersonalBlogWebApp.config import Configuration
-from PersonalBlogWebApp import db, bcrypt, login_manager, mail, scheduler
+from PersonalBlogWebApp import db, bcrypt, login_manager, mail, scheduler, session
 from PersonalBlogWebApp.scheduler import schedule_posts
 
 
@@ -13,6 +13,7 @@ def create_app(config_class=Configuration):
     login_manager.init_app(app)
     mail.init_app(app)
     scheduler.init_app(app)
+    session.init_app(app)
 
     @scheduler.task('interval', id='schedule_posts', seconds=60)
     def scheduled_task():

@@ -1,4 +1,4 @@
-from PersonalBlogWebApp import db, bcrypt
+from PersonalBlogWebApp import db, bcrypt, session
 from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from PersonalBlogWebApp.models import User, Post
@@ -29,7 +29,7 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -97,10 +97,11 @@ def user_posts(username):
 @users.route("/reset_password", methods=['POST', 'GET'])
 def reset_password_request():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
     form = ResetPasswordRequest()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+        # No need to check if user is None here as in form a custom validator defined to do this
         send_reset_email(user)
         flash('an email has been sent to you with the instructions to reset your password.', 'info')
         return redirect(url_for('users.login'))
@@ -110,18 +111,37 @@ def reset_password_request():
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    user = User.verify_reset_token(token)
-    if user is None:
-        flash('That is an invalid or expired token', 'warning')
-        return redirect(url_for('users.reset_password_request'))
+        return redirect(url_for('main.home'))
+    
+    # Only verify the token for GET requests
+    if request.method == 'GET':
+        user = User.verify_reset_token(token)
+        if user is None:
+            flash('That is an invalid or expired token', 'warning')
+            return redirect(url_for('users.reset_password_request'))
+        # Store the user_id in session
+        session['reset_user_id'] = user.id
+        session.modified = True
+    # For POST requests, get the user from the session
+    elif request.method == 'POST':
+        user_id = session.get('reset_user_id')
+        if not user_id:
+            flash('Reset session expired. Please try again.', 'warning')
+            return redirect(url_for('users.reset_password_request'))
+        user = User.query.get(user_id)
+        if not user:
+            flash('User not found. Please try again.', 'warning')
+            return redirect(url_for('users.reset_password_request'))
+    
     form = ResetPassword()
     if form.validate_on_submit():
-        user.password = bcrypt.generate_password_hash(
-            form.password.data).decode('utf-8')
+        user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         db.session.commit()
+        # Clear the session
+        session.pop('reset_user_id', None)
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
+    
     return render_template('reset_password.html', title='Reset Password', form=form)
 
 

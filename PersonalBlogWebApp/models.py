@@ -7,6 +7,7 @@ from os import urandom
 
 salt = urandom(16)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -20,21 +21,26 @@ class User(db.Model, UserMixin):
     # Modified this line to include cascade
     posts = db.relationship('Post', backref='author', lazy=True, cascade='all, delete-orphan')
 
-    def get_reset_token(self, expiretime=900):
+    # this is an instance method, it takes self as argument which refers to the instance of the class (a specific user object).
+    # it has access to the data of the class instace so it can uses id to create a unique token based on user id
+    def get_reset_token(self, expiretime=100000):
         s = Serializer(current_app.config['SECRET_KEY'], expiretime)
         data = {'user_id': self.id}
         token = s.dumps(data, salt=salt)
         return token
 
+    # this is an instance method, it takes self as argument which refers to the instance of the class (a specific user object).
+    # it has access to the data of the class instace so it can uses id to create a unique token based on user id
     @staticmethod
     def verify_reset_token(token):
-        s = Serializer(current_app.config['SECRET_KEY'])
+        s = Serializer(current_app.config['SECRET_KEY'], 100000)
         try:
             data = s.loads(token, salt=salt)
             user_id = data['user_id']
         except:
             return None
         return User.query.get(user_id)
+
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"

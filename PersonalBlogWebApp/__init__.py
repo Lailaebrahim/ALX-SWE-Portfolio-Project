@@ -3,6 +3,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_apscheduler import APScheduler
+from flask_session import Session
 
 # initializing those objects in the init file of the main project package,
 # so they become easily accessible from anywhere in the project
@@ -27,3 +28,5 @@ mail = Mail()
 
 # create an instance of the scheduler object provided by tha flaks-apschedular extension
 scheduler = APScheduler()
+
+session = Session()

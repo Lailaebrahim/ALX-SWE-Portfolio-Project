@@ -32,7 +32,6 @@ def savr_pic(form_profile_pic):
 def delete_pic(user):
     # deleting the old image from the static folder
     if user.image_file != None and user.image_file != 'default.jpg':
-        # deleting the old image from the static folder
         os.remove(os.path.join(current_app
                                .root_path, 'static/profile_pics', user.image_file))
 
