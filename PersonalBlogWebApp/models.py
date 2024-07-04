@@ -4,7 +4,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from itsdangerous.serializer import Serializer
 from os import urandom
-
+TOKEN_EXPIRATION = 100000 
 salt = urandom(16)
 
 
@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
 
     # this is an instance method, it takes self as argument which refers to the instance of the class (a specific user object).
     # it has access to the data of the class instace so it can uses id to create a unique token based on user id
-    def get_reset_token(self, expiretime=100000):
+    def get_reset_token(self, expiretime=TOKEN_EXPIRATION):
         s = Serializer(current_app.config['SECRET_KEY'], expiretime)
         data = {'user_id': self.id}
         token = s.dumps(data, salt=salt)
@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
     # it has access to the data of the class instace so it can uses id to create a unique token based on user id
     @staticmethod
     def verify_reset_token(token):
-        s = Serializer(current_app.config['SECRET_KEY'], 100000)
+        s = Serializer(current_app.config['SECRET_KEY'], TOKEN_EXPIRATION)
         try:
             data = s.loads(token, salt=salt)
             user_id = data['user_id']
