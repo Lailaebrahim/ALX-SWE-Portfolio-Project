@@ -1,30 +1,45 @@
+"""
+PersonalBlogWebApp Initialization Module
+
+This module initializes core components and extensions for the PersonalBlogWebApp.
+
+Extensions:
+    - SQLAlchemy: For database ORM
+    - Bcrypt: For password hashing
+    - LoginManager: For user session management
+    - Mail: For email functionality
+    - APScheduler: For task scheduling
+
+Each extension is instantiated here to be later initialized with the application
+in the application factory.
+
+Attributes:
+    db (SQLAlchemy): Database ORM instance
+    bcrypt (Bcrypt): Password hashing utility
+    login_manager (LoginManager): User session management utility
+    mail (Mail): Email sending utility
+    scheduler (APScheduler): Task scheduling utility
+"""
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_apscheduler import APScheduler
 
-
-# initializing those objects in the init file of the main project package,
-# so they become easily accessible from anywhere in the project
-
-# initializes a SQLAlchemy object to create a database engine and bind it to the app.
+# Database ORM
 db = SQLAlchemy()
 
-# create an instance for Bcrypt to use it for encryption of data
+# Password hashing utility
 bcrypt = Bcrypt()
 
-# create an instance of the LoginManager associated to the current app
+# User session management
 login_manager = LoginManager()
-
-# to define route to redirect the user when a login is needed
 login_manager.login_view = 'users.login'
-
-# to define the styling of the flash message on redirecting to the login view
 login_manager.login_message_category = 'info'
 
-# create an instance of the mail object which is the interface to the smtp client provided by flask_mail
+# Email functionality
 mail = Mail()
 
-# create an instance of the scheduler object provided by tha flaks-apschedular extension
+# Task scheduling
 scheduler = APScheduler()
