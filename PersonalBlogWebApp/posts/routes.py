@@ -1,3 +1,24 @@
+"""
+Routes for Post Management
+
+This file defines the routes and view functions for handling blog post operations.
+
+Dependencies:
+- flask: For creating routes and handling HTTP requests
+- datetime: For handling date and time
+- flask_login: For user authentication and authorization
+- PersonalBlogWebApp: For database models and operations
+
+Routes:
+    /new/post: Create a new post
+    /new/scheduled/post: Create a new scheduled post
+    /post/<post_id>: Display a specific post
+    /post/<post_id>/update: Update a specific post
+    /post/<post_id>/delete: Delete a specific post
+
+Each route is associated with a view function that handles the logic for that particular endpoint.
+"""
+
 from PersonalBlogWebApp import db
 from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
 from PersonalBlogWebApp.posts.forms import PostForm
@@ -12,6 +33,12 @@ posts = Blueprint('posts', __name__)
 @posts.route('/new/post', methods=['GET', 'POST'])
 @login_required
 def new_post():
+    """
+    Handle creation of a new blog post.
+
+    GET: Render the form for creating a new post
+    POST: Process the form submission and create a new post
+    """
     form = PostForm()
     if form.validate_on_submit():
         # the date_posted will be by default equal to current time and date_scheduled will be None
@@ -27,6 +54,11 @@ def new_post():
 @posts.route('/new/scheduled/post', methods=['GET', 'POST'])
 @login_required
 def new_scheduled_post():
+    """
+    Handle creation of a new scheduled blog post.
+
+    POST: Process the form submission and create a new scheduled post
+    """
     datetime1 = request.form.get('datetime')
     datetime1 = datetime.fromisoformat(datetime1)
     title = request.form['title']
@@ -47,6 +79,11 @@ def new_scheduled_post():
 
 @posts.route("/post/int:<post_id>")
 def post(post_id):
+    """
+    Display a specific blog post.
+
+    GET: Render the page for a specific post
+    """
     post = Post.query.get_or_404(post_id)
     if post.date_scheduled is None:
         return render_template('post.html', title=post.title, post=post)
@@ -57,6 +94,12 @@ def post(post_id):
 @posts.route("/post/int:<post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
+    """
+    Handle updating of a specific blog post.
+
+    GET: Render the form for updating the post
+    POST: Process the form submission and update the post
+    """
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
         abort(403)
@@ -79,6 +122,12 @@ def update_post(post_id):
 @posts.route("/post/int:<post_id>/delete", methods=['POST', 'GET'])
 @login_required
 def delete_post(post_id):
+    """
+    Handle updating of a specific blog post.
+
+    GET: Render the form for updating the post
+    POST: Process the form submission and update the post
+    """
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
         abort(403)
