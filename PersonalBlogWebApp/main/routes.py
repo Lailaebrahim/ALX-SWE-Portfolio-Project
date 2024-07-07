@@ -1,3 +1,26 @@
+"""
+Main Routes Module
+
+This module defines the routes and view functions for general features of the PersonalBlogWebApp
+that are not specific to any particular user.
+
+Dependencies:
+- flask: For creating routes and handling HTTP requests
+- PersonalBlogWebApp.main.forms: For the search form
+- PersonalBlogWebApp.models: For the Post model
+- flask_login: For accessing the current user
+
+Routes:
+    /: Home page
+    /home: Alternative route for home page
+    /search: Search functionality for posts
+    /announcements: Announcements page
+    /dev: About the developer page
+    /Landing-Page: About the project page
+
+Each route is associated with a view function that handles the logic for that particular endpoint.
+"""
+
 from flask import render_template, request, Blueprint
 from PersonalBlogWebApp.main.forms import SearchForm
 from PersonalBlogWebApp.models import Post
@@ -9,6 +32,11 @@ main = Blueprint('main', __name__)
 @main.route("/")
 @main.route("/home")
 def home():
+    """
+    Render the home page.
+
+    Displays a paginated list of all non-scheduled posts, ordered by date posted (descending).
+    """
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter(Post.date_scheduled == None).order_by(
         Post.date_posted.desc()).paginate(page=page, per_page=5)
@@ -17,6 +45,17 @@ def home():
 
 @main.route("/search", methods=['GET', 'POST'])
 def search():
+    """
+    Handle the search functionality.
+
+    GET: Render the search form
+    POST: Process the search query and display results
+    
+    This function handles three scenarios:
+    1. Initial search query submission
+    2. Pagination of search results
+    3. Initial rendering of the search page
+    """
     form = SearchForm()
     # case when user enters a search keyword that is valid
     if form.validate_on_submit():
@@ -44,12 +83,19 @@ def search():
 
 @main.route("/announcements")
 def announcements():
+    """Render the announcements page."""
     return render_template('announcements.html', title="Announcements")
 
 @main.route("/dev")
 def dev():
+    """Render the about developer page."""
     return  render_template('dev.html', title="About Developer")
 
 @main.route("/Landing-Page")
 def About_project():
+    """
+    Render the landing page / about project page.
+    
+    This page includes information about the application and considers the current user's authentication status.
+    """
     return  render_template('landing_page.html', title="About App", current_user=current_user)
