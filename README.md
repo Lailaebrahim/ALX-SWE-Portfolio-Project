@@ -106,7 +106,41 @@ with open('path/to/your/configuration/file') as f:
 python run.py
 ```
 
-8. Open your web browser and visit [http://localhost:5000](http://localhost:5000) to view the application.
+## Usage
+
+
+1. Register: Begin by creating an account on the platform. Fill in the required information and click on the "Register" button. You will be redirected to a confirmation page.
+
+![Registration Page](static/landing_page/register.png)
+
+2. Login: After registering, you can log in to your account using your credentials. Enter your username and password and click on the "Login" button. Upon successful login, you will be directed to the homepage.
+
+![Login Page](static/landing_page/login.png)
+
+3. Create a Blog: Once logged in, you can create a blog post. Click on the "New Post" button to start writing your blog. You can either publish it immediately or schedule it for a later date.
+
+![New Post Page](static/landing_page/new_post.png)
+
+4. Update or Delete Blogs: If you wish to make changes to your existing blogs, navigate to the "Update/Delete" section. Here, you can edit the content of your blog posts or delete them entirely.
+
+![Update/Delete Page](static/landing_page/update_delete.png)
+
+5. Update Account Information: To update your account details, go to the "Account" section. Here, you can modify your username, email address, and other personal information.
+
+![Account Page](static/landing_page/account.png)
+
+6. Reset Password: In case you forget your password, you can reset it by clicking on the "Forgot Password" link. Follow the instructions provided to regain access to your account.
+
+![Reset Password Page](static/landing_page/reset_password.png)
+
+7. Search Blogs: If you are looking for specific blog posts, you can use the search feature. Enter relevant keywords in the search bar, and the application will display matching results.
+
+![Search Page](static/landing_page/search.png)
+
+8. Delete Account: If you decide to delete your account, including all your posted blogs, you can do so in the "Delete Account" section. Confirm your decision, and your account will be permanently removed.
+
+![Delete Account Page](static/landing_page/delete_account.png)
+
 
 
 ## License
