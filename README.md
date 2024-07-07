@@ -1,4 +1,4 @@
-# [Personal Blog]
+# Personal Blog
 
 
 ## Introduction
