@@ -149,5 +149,10 @@ This section provides detailed instructions for setting up the project environme
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-
 Feel free to explore the project and provide any feedback or suggestions. Thank you for your time! 😊
+
+## Blog Post
+
+I have written a blog post about the project titled "The print(‘Hello World!’) of web development". In this blog post, I discuss the development process and key features of the application. You can read the blog post [here](https://medium.com/@lailaebrahiem108/the-print-hello-world-of-web-development-06784e6fdb60).
+
+Feel free to check it out and leave any comments or feedback. Thank you for your interest!
